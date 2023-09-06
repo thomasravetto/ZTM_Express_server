@@ -1,7 +1,12 @@
 const messages = require("../models/messages.model")
+const path = require('path')
 
 function getMessages(req, res) {
-    res.json(messages)
+    res.render('messages', {
+        title: "Message to my friend!",
+        friend: "Elon Musk"
+    })
+    // res.sendFile(path.join(__dirname, '..','images', 'public', 'rocciamelone.jpg'))
 }
 
 

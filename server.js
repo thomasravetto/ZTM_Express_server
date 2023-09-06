@@ -1,10 +1,14 @@
 const express = require("express")
 const friendsRouter = require("./routes/friends.router")
 const messagesRouter = require("./routes/messages.router")
+const path = require('path')
 
 
 const app = express();
+app.set('view engine', 'hbs')
+app.set('views', path.join(__dirname, 'views'))
 
+app.use("/site", express.static(path.join(__dirname, 'public')))
 app.use(express.json());
 
 const PORT = 3500;
@@ -17,6 +21,12 @@ app.use((req, res, next) => {
 })
 
 
+app.get("/", (req, res) => {
+    res.render('index', {
+        title: "Rocciamelone",
+        caption: "Mountains are beautiful"
+    })
+})
 app.use("/friends", friendsRouter)
 app.use("/messages", messagesRouter)
 
